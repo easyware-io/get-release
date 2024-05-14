@@ -44,7 +44,7 @@ const github_1 = __nccwpck_require__(5438);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const token = core.getInput('github-token', { required: true });
+            const token = core.getInput('token', { required: true });
             const tag = core.getInput('release', { required: true });
             let owner = core.getInput('owner');
             let repo = core.getInput('repo');
