@@ -1,0 +1,25 @@
+name: 'Detects if a release is still a pre-release.'
+description: 'Detects if a release is still a pre-release.'
+author: 'easyware.io'
+inputs:
+  release:
+    required: true
+    description: 'Release to check'
+  owner:
+    required: false
+    description: 'Owner of the repository'
+  repo:
+    required: false
+    description: 'Repository name'
+  token:
+    required: true
+    description: 'GitHub token'
+outputs:
+  isPreRelease:
+    description: 'Is the release a pre-release'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: shield
+  color: orange
