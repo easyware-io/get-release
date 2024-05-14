@@ -61,6 +61,7 @@ function run() {
                 core.debug(`No repo provided, using ${github_1.context.repo.repo}`);
                 repo = github_1.context.repo.repo;
             }
+            core.info(`Getting release ${tag} from ${owner}/${repo}`);
             const release = yield octokit.rest.repos.getReleaseByTag({
                 owner,
                 repo,
