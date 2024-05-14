@@ -61,13 +61,11 @@ function run() {
                 core.debug(`No repo provided, using ${github_1.context.repo.repo}`);
                 repo = github_1.context.repo.repo;
             }
-            core.info(`Getting release ${tag} from ${owner}/${repo}`);
             const release = yield octokit.rest.repos.getReleaseByTag({
                 owner,
                 repo,
                 tag,
             });
-            core.info(`Release: ${JSON.stringify(release)}`);
             if (release.data.prerelease) {
                 core.setOutput('is-pre-release', 'true');
                 core.debug('The release is still a pre-release.');
@@ -78,9 +76,8 @@ function run() {
             }
         }
         catch (error) {
-            core.setOutput('is-pre-release', 'invalid');
-            if (error instanceof Error)
-                core.setFailed(`Failed get release: ${error.message}`);
+            core.setOutput('is-pre-release', 'not-found');
+            core.debug(`Release not found.`);
         }
     });
 }
