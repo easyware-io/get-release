@@ -3,7 +3,7 @@ import { context, getOctokit } from '@actions/github';
 
 export default async function run(): Promise<void> {
   try {
-    const token = core.getInput('github-token', { required: true });
+    const token = core.getInput('token', { required: true });
     const tag = core.getInput('release', { required: true });
     let owner = core.getInput('owner');
     let repo = core.getInput('repo');
