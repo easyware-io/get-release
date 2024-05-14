@@ -1,13 +1,13 @@
 import * as core from '@actions/core';
-import { context, GitHub } from '@actions/github';
+import { context, getOctokit } from '@actions/github';
 
 export default async function run(): Promise<void> {
   try {
     const token = core.getInput('github-token', { required: true });
-    const releaseId = core.getInput('release', { required: true });
+    const tag = core.getInput('release', { required: true });
     let owner = core.getInput('owner');
     let repo = core.getInput('repo');
-    const octokit = new GitHub(token);
+    const octokit = getOctokit(token);
 
     if (!token) {
       core.setFailed('GitHub token is required.');
@@ -22,11 +22,13 @@ export default async function run(): Promise<void> {
       repo = context.repo.repo;
     }
 
-    const release = await octokit.repos.getRelease({
+    const release = await octokit.rest.repos.getReleaseByTag({
       owner,
       repo,
-      release_id: releaseId,
+      tag,
     });
+
+    core.info(`Release: ${JSON.stringify(release)}`);
 
     if (release.data.prerelease) {
       core.setOutput('is-pre-release', 'true');
