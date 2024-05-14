@@ -15,7 +15,7 @@ inputs:
     required: true
     description: 'GitHub token'
 outputs:
-  isPreRelease:
+  is-pre-release:
     description: 'Is the release a pre-release'
 runs:
   using: 'node20'
