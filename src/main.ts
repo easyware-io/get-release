@@ -22,15 +22,11 @@ export default async function run(): Promise<void> {
       repo = context.repo.repo;
     }
 
-    core.info(`Getting release ${tag} from ${owner}/${repo}`);
-
     const release = await octokit.rest.repos.getReleaseByTag({
       owner,
       repo,
       tag,
     });
-
-    core.info(`Release: ${JSON.stringify(release)}`);
 
     if (release.data.prerelease) {
       core.setOutput('is-pre-release', 'true');
@@ -40,8 +36,8 @@ export default async function run(): Promise<void> {
       core.debug('The release is not a pre-release.');
     }
   } catch (error) {
-    core.setOutput('is-pre-release', 'invalid');
-    if (error instanceof Error) core.setFailed(`Failed get release: ${error.message}`);
+    core.setOutput('is-pre-release', 'not-found');
+    core.debug(`Release not found.`);
   }
 }
 

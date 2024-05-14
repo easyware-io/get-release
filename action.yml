@@ -16,7 +16,7 @@ inputs:
     description: 'GitHub token'
 outputs:
   is-pre-release:
-    description: 'Is the release a pre-release'
+    description: 'The release a pre-release (true, false or not-found)'
 runs:
   using: 'node20'
   main: 'dist/index.js'
