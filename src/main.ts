@@ -22,6 +22,8 @@ export default async function run(): Promise<void> {
       repo = context.repo.repo;
     }
 
+    core.info(`Getting release ${tag} from ${owner}/${repo}`);
+
     const release = await octokit.rest.repos.getReleaseByTag({
       owner,
       repo,
