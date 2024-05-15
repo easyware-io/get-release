@@ -1,25 +1,84 @@
-name: 'Gets the release data from GitHub'
-description: 'Gets the release data from GitHub for a specific release based on the release tag.'
-author: 'easyware.io'
+name: Get Release
+description: Get release information from a GitHub repository
 inputs:
-  tag_name:
-    required: true
-    description: 'Release tag to check'
-  owner:
-    required: false
-    description: 'Owner of the repository'
-  repo:
-    required: false
-    description: 'Repository name'
   token:
-    required: true
     description: 'GitHub token'
+    required: true
+  tag_name:
+    description: 'Tag name of the release'
+    required: true
+  owner:
+    description: 'Owner of the repository'
+    required: false
+  repo:
+    description: 'Name of the repository'
+    required: false
 outputs:
-  data:
-    description: 'The release data'
+  id:
+    description: 'ID of the release'
+  name:
+    description: 'Name of the release'
+  tag_name:
+    description: 'Tag name of the release'
+  body:
+    description: 'Body of the release'
+  draft:
+    description: 'Whether the release is a draft'
+  prerelease:
+    description: 'Whether the release is a prerelease'
+  created_at:
+    description: 'Creation date of the release'
+  published_at:
+    description: 'Publication date of the release'
+  url:
+    description: 'URL of the release'
+  html_url:
+    description: 'HTML URL of the release'
+  assets_url:
+    description: 'URL of the release assets'
+  upload_url:
+    description: 'URL for uploading assets to the release'
+  tarball_url:
+    description: 'URL of the release tarball'
+  zipball_url:
+    description: 'URL of the release zipball'
+  node_id:
+    description: 'Node ID of the release'
+  author_login:
+    description: 'Login of the release author'
+  author_id:
+    description: 'ID of the release author'
+  author_node_id:
+    description: 'Node ID of the release author'
+  author_avatar_url:
+    description: 'Avatar URL of the release author'
+  author_html_url:
+    description: 'HTML URL of the release author'
+  author_followers_url:
+    description: 'URL of the followers of the release author'
+  author_following_url:
+    description: 'URL of the users followed by the release author'
+  author_gists_url:
+    description: 'URL of the gists created by the release author'
+  author_starred_url:
+    description: 'URL of the repositories starred by the release author'
+  author_subscriptions_url:
+    description: 'URL of the subscriptions of the release author'
+  author_organizations_url:
+    description: 'URL of the organizations the release author belongs to'
+  author_repos_url:
+    description: 'URL of the repositories owned by the release author'
+  author_events_url:
+    description: 'URL of the events performed by the release author'
+  author_received_events_url:
+    description: 'URL of the events received by the release author'
+  author_type:
+    description: 'Type of the release author'
+  author_site_admin:
+    description: 'Whether the release author is a site admin'
 runs:
   using: 'node20'
-  main: 'dist/index.js'
+  main: 'src/main.ts'
 branding:
   icon: shield
   color: orange
