@@ -45,7 +45,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const token = core.getInput('token', { required: true });
-            const tag = core.getInput('release', { required: true });
+            const tag = core.getInput('tag', { required: true });
             let owner = core.getInput('owner');
             let repo = core.getInput('repo');
             const octokit = (0, github_1.getOctokit)(token);
@@ -66,17 +66,10 @@ function run() {
                 repo,
                 tag,
             });
-            if (release.data.prerelease) {
-                core.setOutput('is-pre-release', 'true');
-                core.debug('The release is still a pre-release.');
-            }
-            else {
-                core.setOutput('is-pre-release', 'false');
-                core.debug('The release is not a pre-release.');
-            }
+            core.setOutput('data', JSON.parse(JSON.stringify(release.data)));
         }
         catch (error) {
-            core.setOutput('is-pre-release', 'not-found');
+            core.setOutput('data', JSON.parse('{ id: 0 }'));
             core.debug(`Release not found.`);
         }
     });
