@@ -78,7 +78,7 @@ outputs:
     description: 'Whether the release author is a site admin'
 runs:
   using: 'node20'
-  main: 'src/main.ts'
+  main: 'dist/index.ts'
 branding:
   icon: shield
   color: orange
