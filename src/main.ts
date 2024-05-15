@@ -23,6 +23,8 @@ export default async function run(): Promise<void> {
       tag,
     });
 
+    core.debug(`Release: ${JSON.stringify(release.data)}`);
+    core.debug(`Setting outputs`);
     core.setOutput('id', release.data.id);
     core.setOutput('name', release.data.name);
     core.setOutput('tag_name', release.data.tag_name);
@@ -55,8 +57,38 @@ export default async function run(): Promise<void> {
     core.setOutput('author_type', release.data.author.type);
     core.setOutput('author_site_admin', release.data.author.site_admin);
   } catch (error) {
-    core.setOutput('data', null);
-    core.debug(`Release not found.`);
+    core.setOutput('id', null);
+    core.setOutput('name', null);
+    core.setOutput('tag_name', null);
+    core.setOutput('body', null);
+    core.setOutput('draft', null);
+    core.setOutput('prerelease', null);
+    core.setOutput('created_at', null);
+    core.setOutput('published_at', null);
+    core.setOutput('url', null);
+    core.setOutput('html_url', null);
+    core.setOutput('assets_url', null);
+    core.setOutput('upload_url', null);
+    core.setOutput('tarball_url', null);
+    core.setOutput('zipball_url', null);
+    core.setOutput('node_id', null);
+    core.setOutput('author_login', null);
+    core.setOutput('author_id', null);
+    core.setOutput('author_node_id', null);
+    core.setOutput('author_avatar_url', null);
+    core.setOutput('author_html_url', null);
+    core.setOutput('author_followers_url', null);
+    core.setOutput('author_following_url', null);
+    core.setOutput('author_gists_url', null);
+    core.setOutput('author_starred_url', null);
+    core.setOutput('author_subscriptions_url', null);
+    core.setOutput('author_organizations_url', null);
+    core.setOutput('author_repos_url', null);
+    core.setOutput('author_events_url', null);
+    core.setOutput('author_received_events_url', null);
+    core.setOutput('author_type', null);
+    core.setOutput('author_site_admin', null);
+    core.info(`Release not found.`);
   }
 }
 
