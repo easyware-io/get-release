@@ -66,7 +66,7 @@ function run() {
                 const filteredReleases = allReleases.data.filter((r) => r.name === release_name);
                 core.debug(`${allReleases.data.length} filtered releases: ${JSON.stringify(filteredReleases)}`);
                 if (filteredReleases.length === 1) {
-                    release = JSON.parse(JSON.stringify(filteredReleases[0]));
+                    release = filteredReleases[0];
                 }
                 else if (filteredReleases.length > 1) {
                     core.error(`Multiple releases with name ${release_name} found.`);
@@ -82,12 +82,12 @@ function run() {
                     tag,
                 })));
             }
+            core.debug(`Release: ${release.data}`);
             if (release == null) {
                 core.error(`No release found.`);
                 core.setFailed(`No release found.`);
                 return;
             }
-            core.debug(`Release: ${JSON.stringify(release.data)}`);
             core.debug(`Setting outputs`);
             core.setOutput('id', release.data.id);
             core.setOutput('name', release.name);
