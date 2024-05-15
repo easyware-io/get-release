@@ -49,13 +49,13 @@ export default async function run(): Promise<void> {
       );
     }
 
+    core.debug(`Release: ${release.data}`);
     if (release == null) {
       core.error(`No release found.`);
       core.setFailed(`No release found.`);
       return;
     }
 
-    core.debug(`Release: ${JSON.stringify(release.data)}`);
     core.debug(`Setting outputs`);
     core.setOutput('id', release.data.id);
     core.setOutput('name', release.name);
