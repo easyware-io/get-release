@@ -53,8 +53,7 @@ export default async function run(): Promise<void> {
 
     core.debug(`Release: ${release}`);
     if (release == null) {
-      core.error(`No release found.`);
-      core.setFailed(`No release found.`);
+      core.info(`No release found.`);
       return;
     }
 
