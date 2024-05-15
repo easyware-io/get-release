@@ -30,7 +30,7 @@ export default async function run(): Promise<void> {
 
       core.debug(`${allReleases.data.length} filtered releases: ${JSON.stringify(filteredReleases)}`);
       if (filteredReleases.length === 1) {
-        release = JSON.parse(JSON.stringify(filteredReleases[0]));
+        release = filteredReleases[0];
       } else if (filteredReleases.length > 1) {
         core.error(`Multiple releases with name ${release_name} found.`);
         core.setFailed(`Multiple releases with name ${release_name} found.`);
