@@ -1,4 +1,4 @@
-name: Get Release
+name: easyware.io/get-release
 description: Get release information from a GitHub repository
 inputs:
   token:
