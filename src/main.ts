@@ -20,15 +20,18 @@ export default async function run(): Promise<void> {
     let release = null;
     if (release_name != null && release_name !== '') {
       core.debug(`Getting release by name ${release_name} from ${owner}/${repo}`);
-
       const allReleases = await octokit.rest.repos.listReleases({
         owner,
         repo,
       });
 
+      core.debug(`${allReleases.data.length} releases found: ${JSON.stringify(allReleases.data)}`);
       const filteredReleases = allReleases.data.filter((r) => r.name === release_name);
-      if (filteredReleases.length === 1) release = JSON.parse(JSON.stringify(filteredReleases[0]));
-      else if (filteredReleases.length > 1) {
+
+      core.debug(`${allReleases.data.length} filtered releases: ${JSON.stringify(filteredReleases)}`);
+      if (filteredReleases.length === 1) {
+        release = JSON.parse(JSON.stringify(filteredReleases[0]));
+      } else if (filteredReleases.length > 1) {
         core.error(`Multiple releases with name ${release_name} found.`);
         core.setFailed(`Multiple releases with name ${release_name} found.`);
         return;
