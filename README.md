@@ -1,16 +1,16 @@
-# easyware-io/is-pre-release@v1
+# easyware-io/get-release@v1
 
-![CI](https://github.com/easyware-io/is-pre-release/actions/workflows/build.yml/badge.svg)
+![CI](https://github.com/easyware-io/get-release/actions/workflows/build.yml/badge.svg)
 
-Detects if a release is still a pre-release.
+Gets the release data from GitHub for a specific release based on the release tag.
 
 ## Usage
 
 ### Basic usage
 
 ```yaml
-- name: Detects if a release is still a pre-release.
-  uses: easyware-io/is-pre-release@v1
+- name: Get release
+  uses: easyware-io/get-release@v1
   with:
     release: v1.0.0
     token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,10 +1,10 @@
-name: 'Detects if a release is still a pre-release.'
-description: 'Detects if a release is still a pre-release.'
+name: 'Gets the release data from GitHub'
+description: 'Gets the release data from GitHub for a specific release based on the release tag.'
 author: 'easyware.io'
 inputs:
-  release:
+  tag:
     required: true
-    description: 'Release to check'
+    description: 'Release tag to check'
   owner:
     required: false
     description: 'Owner of the repository'
@@ -15,8 +15,8 @@ inputs:
     required: true
     description: 'GitHub token'
 outputs:
-  is-pre-release:
-    description: 'The release a pre-release (true, false or not-found)'
+  data:
+    description: 'The release data'
 runs:
   using: 'node20'
   main: 'dist/index.js'
