@@ -40,27 +40,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
-const github_1 = __nccwpck_require__(5438);
+const github = __importStar(__nccwpck_require__(5438));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            core.debug('Getting owner and repo from context');
+            const currentOwner = github.context.repo.owner;
+            const currentRepo = github.context.repo.repo;
+            core.debug('Getting inputs from the user');
             const token = core.getInput('token', { required: true });
-            const tag = core.getInput('tag', { required: true });
-            let owner = core.getInput('owner');
-            let repo = core.getInput('repo');
-            const octokit = (0, github_1.getOctokit)(token);
-            if (!token) {
-                core.setFailed('GitHub token is required.');
-                return;
-            }
-            if (!owner || owner === '') {
-                core.debug(`No owner provided, using ${github_1.context.repo.owner}`);
-                owner = github_1.context.repo.owner;
-            }
-            if (!repo || repo === '') {
-                core.debug(`No repo provided, using ${github_1.context.repo.repo}`);
-                repo = github_1.context.repo.repo;
-            }
+            const tag = core.getInput('tag_name', { required: true });
+            const owner = core.getInput('owner') || currentOwner;
+            const repo = core.getInput('repo') || currentRepo;
+            core.debug(`Creating Octokit instance with token: ${token}`);
+            const octokit = github.getOctokit(token);
+            core.debug(`Getting release by tag: ${tag}`);
             const release = yield octokit.rest.repos.getReleaseByTag({
                 owner,
                 repo,
@@ -69,7 +63,7 @@ function run() {
             core.setOutput('data', JSON.parse(JSON.stringify(release.data)));
         }
         catch (error) {
-            core.setOutput('data', JSON.parse('{ id: 0 }'));
+            core.setOutput('data', null);
             core.debug(`Release not found.`);
         }
     });
