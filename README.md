@@ -12,7 +12,7 @@ Gets the release data from GitHub for a specific release based on the release ta
 - name: Get release
   uses: easyware-io/get-release@v1
   with:
-    release: v1.0.0
+    release_name: v1.0.0
     token: ${{ secrets.GITHUB_TOKEN }}
     owner: <optional>
     repo: <optional>

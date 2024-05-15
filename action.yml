@@ -4,9 +4,12 @@ inputs:
   token:
     description: 'GitHub token'
     required: true
+  release_name:
+    description: 'Release name of the release. Takes preference over `tag_name`'
+    required: false
   tag_name:
-    description: 'Tag name of the release'
-    required: true
+    description: 'Tag name of the release. Is ignored if `release_name` is informed'
+    required: false
   owner:
     description: 'Owner of the repository'
     required: false
