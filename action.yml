@@ -2,7 +2,7 @@ name: 'Gets the release data from GitHub'
 description: 'Gets the release data from GitHub for a specific release based on the release tag.'
 author: 'easyware.io'
 inputs:
-  tag:
+  tag_name:
     required: true
     description: 'Release tag to check'
   owner:
