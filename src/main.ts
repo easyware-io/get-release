@@ -23,7 +23,7 @@ export default async function run(): Promise<void> {
       tag,
     });
 
-    core.setOutput('data', JSON.parse(JSON.stringify(release.data)));
+    core.setOutput('data', JSON.stringify(release.data));
   } catch (error) {
     core.setOutput('data', null);
     core.debug(`Release not found.`);
