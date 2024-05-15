@@ -60,7 +60,7 @@ function run() {
                 repo,
                 tag,
             });
-            core.setOutput('data', JSON.parse(JSON.stringify(release.data)));
+            core.setOutput('data', JSON.stringify(release.data));
         }
         catch (error) {
             core.setOutput('data', null);
