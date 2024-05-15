@@ -62,9 +62,12 @@ function run() {
                     owner,
                     repo,
                 });
+                core.debug(`${allReleases.data.length} releases found: ${JSON.stringify(allReleases.data)}`);
                 const filteredReleases = allReleases.data.filter((r) => r.name === release_name);
-                if (filteredReleases.length === 1)
+                core.debug(`${allReleases.data.length} filtered releases: ${JSON.stringify(filteredReleases)}`);
+                if (filteredReleases.length === 1) {
                     release = JSON.parse(JSON.stringify(filteredReleases[0]));
+                }
                 else if (filteredReleases.length > 1) {
                     core.error(`Multiple releases with name ${release_name} found.`);
                     core.setFailed(`Multiple releases with name ${release_name} found.`);
