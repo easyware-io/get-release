@@ -85,8 +85,7 @@ function run() {
             }
             core.debug(`Release: ${release}`);
             if (release == null) {
-                core.error(`No release found.`);
-                core.setFailed(`No release found.`);
+                core.info(`No release found.`);
                 return;
             }
             core.debug(`Setting outputs`);
