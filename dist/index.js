@@ -49,21 +49,45 @@ function run() {
             const currentRepo = github.context.repo.repo;
             core.debug('Getting inputs from the user');
             const token = core.getInput('token', { required: true });
-            const tag = core.getInput('tag_name', { required: true });
+            const tag = core.getInput('tag_name');
+            const release_name = core.getInput('release_name');
             const owner = core.getInput('owner') || currentOwner;
             const repo = core.getInput('repo') || currentRepo;
             core.debug(`Creating Octokit instance with token: ${token}`);
             const octokit = github.getOctokit(token);
-            core.debug(`Getting release by tag ${tag} from ${owner}/${repo}`);
-            const release = yield octokit.rest.repos.getReleaseByTag({
-                owner,
-                repo,
-                tag,
-            });
+            let release = null;
+            if (release_name != null && release_name !== '') {
+                core.debug(`Getting release by name ${release_name} from ${owner}/${repo}`);
+                const allReleases = yield octokit.rest.repos.listReleases({
+                    owner,
+                    repo,
+                });
+                const filteredReleases = allReleases.data.filter((r) => r.name === release_name);
+                if (filteredReleases.length === 1)
+                    release = JSON.parse(JSON.stringify(filteredReleases[0]));
+                else if (filteredReleases.length > 1) {
+                    core.error(`Multiple releases with name ${release_name} found.`);
+                    core.setFailed(`Multiple releases with name ${release_name} found.`);
+                    return;
+                }
+            }
+            else if (tag != null && tag !== '') {
+                core.debug(`Getting release by tag ${tag} from ${owner}/${repo}`);
+                release = JSON.parse(JSON.stringify(yield octokit.rest.repos.getReleaseByTag({
+                    owner,
+                    repo,
+                    tag,
+                })));
+            }
+            if (release == null) {
+                core.error(`No release found.`);
+                core.setFailed(`No release found.`);
+                return;
+            }
             core.debug(`Release: ${JSON.stringify(release.data)}`);
             core.debug(`Setting outputs`);
             core.setOutput('id', release.data.id);
-            core.setOutput('name', release.data.name);
+            core.setOutput('name', release.name);
             core.setOutput('tag_name', release.data.tag_name);
             core.setOutput('body', release.data.body);
             core.setOutput('draft', release.data.draft);
