@@ -16,6 +16,26 @@ inputs:
   repo:
     description: 'Name of the repository'
     required: false
+  error-if-draft:
+    description: 'Action fails if release is still a draft'
+    required: false
+    default: 'false'
+  error-if-not-draft:
+    description: 'Action fails if release is not a draft'
+    required: false
+    default: 'false'
+  error-if-prerelease:
+    description: 'Action fails if release is a prerelease'
+    required: false
+    default: 'false'
+  error-if-not-prerelease:
+    description: 'Action fails if release is not a prerelease'
+    required: false
+    default: 'false'
+  error-if-not-found:
+    description: 'Action fails if release is not found'
+    required: false
+    default: 'false'
 outputs:
   id:
     description: 'ID of the release'

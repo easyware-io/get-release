@@ -14,9 +14,49 @@ Gets the release data from GitHub for a specific release based on the release ta
   with:
     release_name: v1.0.0
     token: ${{ secrets.GITHUB_TOKEN }}
-    owner: <optional>
-    repo: <optional>
 ```
+
+### Inputs
+
+#### `token`
+
+GitHub token
+
+#### `release_name`
+
+Release name of the release. Takes preference over `tag_name`
+
+#### `tag_name`
+
+Tag name of the release. Is ignored if `release_name` is informed
+
+#### `owner`
+
+Optional. Owner of the repository. Defaults to current owner.
+
+#### `repo`
+
+Optional. Name of the repository. Defaults to current repo.
+
+#### `error-if-draft`
+
+Optional. Action fails if release is still a draft. Defaults to false.
+
+#### `error-if-not-draft`
+
+Optional. Action fails if release is not a draft. Defaults to false.
+
+#### `error-if-prerelease`
+
+Optional. Action fails if release is a prerelease. Defaults to false.
+
+#### `error-if-not-prerelease`
+
+Optional. Action fails if release is not a prerelease. Defaults to false.
+
+#### `error-if-not-found`
+
+Optional. Action fails if release is not found. Defaults to false.
 
 ### Outputs
 

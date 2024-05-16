@@ -13,6 +13,11 @@ export default async function run(): Promise<void> {
     const release_name = core.getInput('release_name');
     const owner = core.getInput('owner') || currentOwner;
     const repo = core.getInput('repo') || currentRepo;
+    const errorIfDraft = core.getInput('error-if-draft') === 'true';
+    const errorIfNotDraft = core.getInput('error-if-not-draft') === 'true';
+    const errorIfPrerelease = core.getInput('error-if-prerelease') === 'true';
+    const errorIfNotPrerelease = core.getInput('error-if-not-prerelease') === 'true';
+    const errorIfNotFound = core.getInput('error-if-not-found') === 'true';
 
     core.debug(`Creating Octokit instance with token: ${token}`);
     const octokit = github.getOctokit(token);
@@ -53,7 +58,33 @@ export default async function run(): Promise<void> {
 
     core.debug(`Release: ${release}`);
     if (release == null) {
-      core.info(`No release found.`);
+      if (errorIfNotFound) {
+        core.error(`No release found.`);
+        core.setFailed(`No release found.`);
+      } else {
+        core.info(`No release found.`);
+      }
+      return;
+    }
+
+    if (errorIfDraft && release.draft) {
+      core.error(`Release is a draft.`);
+      core.setFailed(`Release is a draft.`);
+      return;
+    }
+    if (errorIfNotDraft && !release.draft) {
+      core.error(`Release is not a draft.`);
+      core.setFailed(`Release is not a draft.`);
+      return;
+    }
+    if (errorIfPrerelease && release.prerelease) {
+      core.error(`Release is a prerelease.`);
+      core.setFailed(`Release is a prerelease.`);
+      return;
+    }
+    if (errorIfNotPrerelease && !release.prerelease) {
+      core.error(`Release is not a prerelease.`);
+      core.setFailed(`Release is not a prerelease.`);
       return;
     }
 
