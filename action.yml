@@ -53,6 +53,8 @@ outputs:
     description: 'Whether the release is a draft'
   prerelease:
     description: 'Whether the release is a prerelease'
+  published:
+    description: 'Whether the release is published'
   created_at:
     description: 'Creation date of the release'
   published_at:

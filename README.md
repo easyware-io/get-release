@@ -88,6 +88,10 @@ Whether the release is a draft
 
 Whether the release is a prerelease
 
+#### `published``
+
+Whether the release is published
+
 #### `created_at`
 
 Creation date of the release
