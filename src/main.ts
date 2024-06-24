@@ -57,7 +57,6 @@ export default async function run(): Promise<void> {
       );
     }
 
-    core.debug(`Release: ${release}`);
     if (release == null) {
       if (errorIfNotFound) {
         core.error(`No release found.`);
@@ -67,6 +66,8 @@ export default async function run(): Promise<void> {
       }
       return;
     }
+
+    core.info(`Release found: ${JSON.stringify(release)}`);
 
     if (errorIfDraft && release.draft) {
       core.error(`Release is a draft.`);
