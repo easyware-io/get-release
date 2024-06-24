@@ -90,7 +90,6 @@ function run() {
                     tag,
                 })));
             }
-            core.debug(`Release: ${release}`);
             if (release == null) {
                 if (errorIfNotFound) {
                     core.error(`No release found.`);
@@ -101,6 +100,7 @@ function run() {
                 }
                 return;
             }
+            core.info(`Release found: ${JSON.stringify(release)}`);
             if (errorIfDraft && release.draft) {
                 core.error(`Release is a draft.`);
                 core.setFailed(`Release is a draft.`);
