@@ -54,6 +54,10 @@ Optional. Action fails if release is a prerelease. Defaults to false.
 
 Optional. Action fails if release is not a prerelease. Defaults to false.
 
+#### `error-if-published`
+
+Optional. Action fails if release is published. Defaults to false.
+
 #### `error-if-not-found`
 
 Optional. Action fails if release is not found. Defaults to false.

@@ -32,6 +32,10 @@ inputs:
     description: 'Action fails if release is not a prerelease'
     required: false
     default: 'false'
+  error-if-published:
+    description: 'Action fails if release is published'
+    required: false
+    default: 'false'
   error-if-not-found:
     description: 'Action fails if release is not found'
     required: false
