@@ -39,6 +39,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports["default"] = run;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 function run() {
@@ -57,6 +58,7 @@ function run() {
             const errorIfNotDraft = core.getInput('error-if-not-draft') === 'true';
             const errorIfPrerelease = core.getInput('error-if-prerelease') === 'true';
             const errorIfNotPrerelease = core.getInput('error-if-not-prerelease') === 'true';
+            const errorIfPublished = core.getInput('error-if-published') === 'true';
             const errorIfNotFound = core.getInput('error-if-not-found') === 'true';
             core.debug(`Creating Octokit instance with token: ${token}`);
             const octokit = github.getOctokit(token);
@@ -117,6 +119,11 @@ function run() {
             if (errorIfNotPrerelease && !release.prerelease) {
                 core.error(`Release is not a prerelease.`);
                 core.setFailed(`Release is not a prerelease.`);
+                return;
+            }
+            if (errorIfPublished && release.published_at != null) {
+                core.error(`Release is published.`);
+                core.setFailed(`Release is published.`);
                 return;
             }
             core.debug(`Setting outputs`);
@@ -188,7 +195,6 @@ function run() {
         }
     });
 }
-exports["default"] = run;
 if (require.main === require.cache[eval('__filename')]) {
     run();
 }
