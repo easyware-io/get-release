@@ -133,6 +133,7 @@ function run() {
             core.setOutput('body', release.body);
             core.setOutput('draft', release.draft);
             core.setOutput('prerelease', release.prerelease);
+            core.setOutput('published', release.draft === false && release.prerelease === false);
             core.setOutput('created_at', release.created_at);
             core.setOutput('published_at', release.published_at);
             core.setOutput('url', release.url);
@@ -166,6 +167,7 @@ function run() {
             core.setOutput('body', null);
             core.setOutput('draft', null);
             core.setOutput('prerelease', null);
+            core.setOutput('published', null);
             core.setOutput('created_at', null);
             core.setOutput('published_at', null);
             core.setOutput('url', null);
