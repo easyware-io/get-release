@@ -98,6 +98,38 @@ function run() {
                 else {
                     core.info(`No release found.`);
                 }
+                core.setOutput('id', null);
+                core.setOutput('name', null);
+                core.setOutput('tag_name', null);
+                core.setOutput('body', null);
+                core.setOutput('draft', null);
+                core.setOutput('prerelease', null);
+                core.setOutput('published', false);
+                core.setOutput('created_at', null);
+                core.setOutput('published_at', null);
+                core.setOutput('url', null);
+                core.setOutput('html_url', null);
+                core.setOutput('assets_url', null);
+                core.setOutput('upload_url', null);
+                core.setOutput('tarball_url', null);
+                core.setOutput('zipball_url', null);
+                core.setOutput('node_id', null);
+                core.setOutput('author_login', null);
+                core.setOutput('author_id', null);
+                core.setOutput('author_node_id', null);
+                core.setOutput('author_avatar_url', null);
+                core.setOutput('author_html_url', null);
+                core.setOutput('author_followers_url', null);
+                core.setOutput('author_following_url', null);
+                core.setOutput('author_gists_url', null);
+                core.setOutput('author_starred_url', null);
+                core.setOutput('author_subscriptions_url', null);
+                core.setOutput('author_organizations_url', null);
+                core.setOutput('author_repos_url', null);
+                core.setOutput('author_events_url', null);
+                core.setOutput('author_received_events_url', null);
+                core.setOutput('author_type', null);
+                core.setOutput('author_site_admin', null);
                 return;
             }
             core.info(`Release found: ${JSON.stringify(release)}`);
@@ -133,7 +165,7 @@ function run() {
             core.setOutput('body', release.body);
             core.setOutput('draft', release.draft);
             core.setOutput('prerelease', release.prerelease);
-            core.setOutput('published', release.draft === false && release.prerelease === false);
+            core.setOutput('published', !(release.draft === true || release.prerelease === true));
             core.setOutput('created_at', release.created_at);
             core.setOutput('published_at', release.published_at);
             core.setOutput('url', release.url);
@@ -167,7 +199,7 @@ function run() {
             core.setOutput('body', null);
             core.setOutput('draft', null);
             core.setOutput('prerelease', null);
-            core.setOutput('published', null);
+            core.setOutput('published', false);
             core.setOutput('created_at', null);
             core.setOutput('published_at', null);
             core.setOutput('url', null);
